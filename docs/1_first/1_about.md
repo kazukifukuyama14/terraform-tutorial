@@ -1,6 +1,6 @@
 # Terraform チュートリアル
 
-![Terraform](/docs/first/img/terraform_banner.png)
+![Terraform](/docs/1_first/img/terraform_banner.png)
 
 ## Infrastructure as Code
 
@@ -12,14 +12,14 @@
 
 ## AWS と Terraform
 
-![AWS](/docs/first/img/aws.png)
+![AWS](/docs/1_first/img/aws.png)
 
 Terraform は Infrastructure as Code のためのツール。  
 例えば、上の図のような VPC・ALB・ECS・etc...のような復数のサービスと、その依存関係をコードで記述し、AWS 上へ展開することが可能。
 
 ## IaC ツールの選択肢
 
-![iac](/docs/first/img/iac-logos.png)
+![iac](/docs/1_first/img/iac-logos.png)
 
 他にも Infrastructure as Code を実現するためのツールとして Ansible, Chef, CloudFormation など様々なツールが存在する。  
 それぞれのツールは実現したいことや得意なユースケースが異なるので、それらを把握して使い分けるとよし。
