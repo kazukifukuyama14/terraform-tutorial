@@ -19,8 +19,11 @@ Terraform の学習履歴を記録しています。
 
 ### ソースコード
 
-[リンク](/terraform/)
+[学習用](/terraform/)
+
+[アウトプット用](/terraform-aws-infrastructure/)
 
 ### 構成図
 
-準備中
+アウトプット用のソースコードで構築した構成図  
+※現在準備中
