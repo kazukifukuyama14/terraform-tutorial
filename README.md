@@ -24,7 +24,9 @@ Terraform の学習履歴を記録しています。
 ### 構成図
 
 - 基本構成図
-  [基本構成図](/img/BasicInfrastructureConfigurationDiagram.png)
+
+![基本構成図](/img/BasicInfrastructureConfigurationDiagram.png)
 
 - 詳細構成図
-  [詳細構成図](/img/DetailedInfrastructureDiagram.png)
+
+![詳細構成図](/img/DetailedInfrastructureDiagram.png)
