@@ -10,6 +10,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    random = { # randomプロバイダー追加
+      source  = "hashicorp/random"
+      version = "~> 3.1"
+    }
   }
 }
 
