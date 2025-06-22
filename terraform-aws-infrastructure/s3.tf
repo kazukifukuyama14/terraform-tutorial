@@ -91,6 +91,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "logs" {
     id     = "log_lifecycle"
     status = "Enabled"
 
+    # すべてのオブジェクトに適用するためのフィルター
+    filter {
+      prefix = ""
+    }
+
     # 現在バージョンのオブジェクトを90日で削除
     expiration {
       days = 90
