@@ -103,7 +103,7 @@ variable "db_username" {
   default     = "admin"
 }
 
-# 既存の変数に以下を追加
+# 通信要件追加
 
 variable "allowed_ssh_cidr" {
   description = "CIDR blocks allowed to SSH to bastion"
@@ -121,4 +121,35 @@ variable "db_port" {
   description = "Database port"
   type        = number
   default     = 3306
+}
+
+# EC2情報を追加
+variable "key_pair_name" {
+  description = "EC2インスタンス用のキーペア名"
+  type        = string
+  default     = "" # 空の場合はキーペアなしで起動
+}
+
+variable "root_volume_size" {
+  description = "ルートボリュームのサイズ（GB）"
+  type        = number
+  default     = 20
+}
+
+variable "min_instances" {
+  description = "Auto Scaling Groupの最小インスタンス数"
+  type        = number
+  default     = 1
+}
+
+variable "max_instances" {
+  description = "Auto Scaling Groupの最大インスタンス数"
+  type        = number
+  default     = 4
+}
+
+variable "desired_instances" {
+  description = "Auto Scaling Groupの希望インスタンス数"
+  type        = number
+  default     = 2
 }

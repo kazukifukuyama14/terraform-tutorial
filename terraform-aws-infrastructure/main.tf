@@ -26,20 +26,6 @@ provider "aws" {
 }
 
 # ----------------------------
-# データソースの指定
-# ----------------------------
-# Amazon Linux 2のAMIを取得
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  # Amazon Linux 2のAMIをフィルタリング
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-  }
-}
-# ----------------------------
 # リソースの定義
 # ----------------------------
 # VPC
