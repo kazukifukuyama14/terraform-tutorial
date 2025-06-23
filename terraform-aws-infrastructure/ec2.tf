@@ -105,10 +105,10 @@ resource "aws_launch_template" "app_server" {
 
 # Auto Scaling Group（オートスケーリンググループ）
 resource "aws_autoscaling_group" "app_server" {
-  name                = "${var.project_name}-${var.environment}-asg"
-  vpc_zone_identifier = [aws_subnet.private[*].id] # 最初のプライベートサブネットのみ使用
-  # target_group_arns         = [aws_lb_target_group.app.arn]  # ALB作成後に有効化
-  # health_check_type         = "ELB"                          # ALB作成後に有効化
+  name                      = "${var.project_name}-${var.environment}-asg"
+  vpc_zone_identifier       = [aws_subnet.private[*].id] # 最初のプライベートサブネットのみ使用
+  target_group_arns         = [aws_lb_target_group.app.arn]
+  health_check_type         = "ELB"
   health_check_grace_period = 300
 
   # インスタンス数の設定

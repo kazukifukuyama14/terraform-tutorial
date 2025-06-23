@@ -153,3 +153,16 @@ variable "desired_instances" {
   type        = number
   default     = 2
 }
+
+# 証明書、ドメイン設定追加
+variable "ssl_certificate_arn" {
+  description = "SSL証明書のARN（HTTPS使用時）"
+  type        = string
+  default     = ""
+}
+
+variable "domain_name" {
+  description = "ドメイン名（Route53使用時）"
+  type        = string
+  default     = ""
+}
