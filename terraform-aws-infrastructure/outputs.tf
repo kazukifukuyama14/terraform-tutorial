@@ -29,3 +29,20 @@ output "private_subnet_ids" {
   description = "プライベートサブネットのID一覧"
   value       = aws_subnet.private[*].id
 }
+
+# RDS関連の出力
+output "rds_endpoint" {
+  description = "RDSエンドポイント"
+  value       = aws_db_instance.main.endpoint
+  sensitive   = true
+}
+
+output "rds_port" {
+  description = "RDSポート番号"
+  value       = aws_db_instance.main.port
+}
+
+output "rds_database_name" {
+  description = "データベース名"
+  value       = aws_db_instance.main.db_name
+}

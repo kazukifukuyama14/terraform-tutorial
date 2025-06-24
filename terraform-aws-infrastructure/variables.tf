@@ -166,3 +166,46 @@ variable "domain_name" {
   type        = string
   default     = ""
 }
+
+# RDS関連の変数
+variable "db_engine_version" {
+  description = "RDSエンジンバージョン"
+  type        = string
+  default     = "8.0.35"
+}
+
+variable "db_allocated_storage" {
+  description = "RDS初期ストレージサイズ（GB）"
+  type        = number
+  default     = 20
+}
+
+variable "db_max_allocated_storage" {
+  description = "RDS最大ストレージサイズ（GB）"
+  type        = number
+  default     = 100
+}
+
+variable "db_password" {
+  description = "データベースパスワード"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_backup_retention_period" {
+  description = "バックアップ保持期間（日）"
+  type        = number
+  default     = 7
+}
+
+variable "create_read_replica" {
+  description = "読み取りレプリカを作成するかどうか"
+  type        = bool
+  default     = false
+}
+
+variable "db_replica_instance_class" {
+  description = "読み取りレプリカのインスタンスクラス"
+  type        = string
+  default     = "db.t3.micro"
+}
