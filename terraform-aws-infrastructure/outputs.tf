@@ -46,3 +46,17 @@ output "rds_database_name" {
   description = "データベース名"
   value       = aws_db_instance.main.db_name
 }
+
+# 現在のリージョンを取得するデータソース
+data "aws_region" "current" {}
+
+# CloudWatch関連の出力
+output "cloudwatch_dashboard_url" {
+  description = "CloudWatchダッシュボードのURL"
+  value       = "https://${data.aws_region.current.name}.console.aws.amazon.com/cloudwatch/home?region=${data.aws_region.current.name}#dashboards:name=${aws_cloudwatch_dashboard.main.dashboard_name}"
+}
+
+output "sns_topic_arn" {
+  description = "SNSトピックのARN"
+  value       = aws_sns_topic.alerts.arn
+}

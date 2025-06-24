@@ -209,3 +209,23 @@ variable "db_replica_instance_class" {
   type        = string
   default     = "db.t3.micro"
 }
+
+# CloudWatch関連の変数
+variable "log_retention_days" {
+  description = "CloudWatchログの保持期間（日）"
+  type        = number
+  default     = 14
+}
+
+variable "alert_email" {
+  description = "アラート通知用のメールアドレス"
+  type        = string
+  default     = ""
+}
+
+# リージョン
+variable "aws_region" {
+  description = "AWSリージョン"
+  type        = string
+  default     = "ap-northeast-1"
+}
