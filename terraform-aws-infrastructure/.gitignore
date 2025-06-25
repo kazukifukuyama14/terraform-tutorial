@@ -54,7 +54,7 @@ terraform.tfvars.backup
 *.tfvars
 .terraform/
 terraform.tfstate*
-
+terraform.tfvars
 # その他
 .DS_Store
 *.log
