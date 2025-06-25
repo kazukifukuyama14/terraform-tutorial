@@ -37,4 +37,21 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Terraform関連
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+
+# 秘密鍵ファイル（重要：絶対にコミットしない）
+*.pem
+*.key
+keys/
+.ssh/
+
+# その他
+.DS_Store
+*.log
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform

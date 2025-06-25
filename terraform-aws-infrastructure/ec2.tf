@@ -217,3 +217,56 @@ resource "aws_cloudwatch_metric_alarm" "cpu_low" {
     Environment = var.environment
   }
 }
+
+# Launch Templateのuser_dataセクションを更新
+resource "aws_launch_template" "app" {
+  name_prefix   = "${var.project_name}-app-"
+  image_id      = data.aws_ami.amazon_linux.id
+  instance_type = var.instance_type
+
+  # キーペアの条件付き設定
+  key_name = var.enable_ssh_access && var.key_name != null ? var.key_name : null
+
+  # 正しいセキュリティグループ名に修正
+  vpc_security_group_ids = [aws_security_group.app_server.id]
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ec2_profile.name
+  }
+
+  user_data = base64encode(templatefile("${path.module}/user_data.sh", {
+    project_name = var.project_name
+    region       = data.aws_region.current.name
+  }))
+
+  tag_specifications {
+    resource_type = "instance"
+    tags = {
+      Name        = "${var.project_name}-app-server"
+      Environment = var.environment
+      Project     = var.project_name
+    }
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# 踏み台サーバ用のインスタンス（SSH接続が必要な場合）
+resource "aws_instance" "bastion" {
+  count                  = var.enable_ssh_access && var.key_name != null ? 1 : 0
+  ami                    = data.aws_ami.amazon_linux.id
+  instance_type          = "t3.micro"
+  key_name               = var.key_name
+  subnet_id              = aws_subnet.public[0].id
+  vpc_security_group_ids = [aws_security_group.bastion.id]
+
+  iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
+
+  tags = {
+    Name        = "${var.project_name}-bastion"
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}

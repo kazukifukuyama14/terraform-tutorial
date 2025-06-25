@@ -47,9 +47,6 @@ output "rds_database_name" {
   value       = aws_db_instance.main.db_name
 }
 
-# 現在のリージョンを取得するデータソース
-data "aws_region" "current" {}
-
 # CloudWatch関連の出力
 output "cloudwatch_dashboard_url" {
   description = "CloudWatchダッシュボードのURL"
@@ -100,4 +97,47 @@ output "waf_web_acl_arn" {
 output "waf_web_acl_capacity" {
   description = "WAF Web ACL Capacity"
   value       = aws_wafv2_web_acl.main.capacity
+}
+
+# SSMパラメータの出力
+output "ssm_parameters" {
+  description = "SSMパラメータ名一覧"
+  value = {
+    rds_master_password = aws_ssm_parameter.rds_master_password.name
+    rds_endpoint        = aws_ssm_parameter.rds_endpoint.name
+    database_url        = aws_ssm_parameter.database_url.name
+    app_environment     = aws_ssm_parameter.app_environment.name
+    app_log_level       = aws_ssm_parameter.app_log_level.name
+    s3_static_bucket    = aws_ssm_parameter.s3_static_bucket.name
+    api_key             = aws_ssm_parameter.api_key.name
+    jwt_secret          = aws_ssm_parameter.jwt_secret.name
+  }
+}
+
+# EC2キーペア情報の出力
+output "ec2_key_name" {
+  description = "terraform-tutorial-key"
+  value       = var.key_name
+}
+
+# SSH接続情報の出力
+output "ssh_access_info" {
+  description = "SSH接続設定情報"
+  value = {
+    enabled       = var.enable_ssh_access
+    allowed_cidrs = var.allowed_ssh_cidr
+    key_name      = var.key_name
+  }
+}
+
+# セキュリティグループ情報の出力
+output "security_groups" {
+  description = "作成されたセキュリティグループ"
+  value = {
+    alb        = aws_security_group.alb.id
+    nlb        = aws_security_group.nlb.id
+    app_server = aws_security_group.app_server.id
+    bastion    = aws_security_group.bastion.id
+    rds        = aws_security_group.rds.id
+  }
 }

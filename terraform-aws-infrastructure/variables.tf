@@ -286,3 +286,81 @@ variable "enable_waf_logging" {
   type        = bool
   default     = false
 }
+
+# アプリケーション設定関連の変数
+variable "app_log_level" {
+  description = "アプリケーションのログレベル"
+  type        = string
+  default     = "INFO"
+
+  # 有効な値: DEBUG, INFO, WARN, ERROR
+  validation {
+    condition     = contains(["DEBUG", "INFO", "WARN", "ERROR"], var.app_log_level)
+    error_message = "ログレベルは DEBUG, INFO, WARN, ERROR のいずれかを指定してください。"
+  }
+}
+
+
+# EC2インスタンス設定関連の変数
+variable "key_name" {
+  description = "EC2インスタンスに使用するキーペア名"
+  type        = string
+  default     = null
+}
+
+variable "enable_ssh_access" {
+  description = "SSH接続を有効にするかどうか"
+  type        = bool
+  default     = true
+}
+
+variable "api_key" {
+  description = "外部サービス用のAPIキー"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "jwt_secret" {
+  description = "JWT秘密鍵"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+# SSM Parameter Store 設定関連の変数
+
+variable "ssm_parameter_tier" {
+  description = "SSMパラメータのティア設定"
+  type        = string
+  default     = "Standard"
+  validation {
+    condition     = contains(["Standard", "Advanced"], var.ssm_parameter_tier)
+    error_message = "SSMパラメータティアは Standard または Advanced を指定してください。"
+  }
+}
+
+variable "enable_ssm_encryption" {
+  description = "SSMパラメータの暗号化を有効にするかどうか"
+  type        = bool
+  default     = true
+}
+
+variable "parameter_store_kms_key_id" {
+  description = "SSMパラメータストア用のKMSキーID（オプション）"
+  type        = string
+  default     = null
+}
+
+# 環境固有の設定変数
+variable "backup_retention_days" {
+  description = "バックアップの保持日数"
+  type        = number
+  default     = 7
+}
+
+variable "monitoring_enabled" {
+  description = "詳細監視を有効にするかどうか"
+  type        = bool
+  default     = true
+}
