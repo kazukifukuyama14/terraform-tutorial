@@ -167,6 +167,20 @@ variable "domain_name" {
   default     = ""
 }
 
+# Route53関連の変数
+variable "enable_private_dns" {
+  description = "プライベートDNSを有効にするかどうか"
+  type        = bool
+  default     = false
+}
+
+variable "enable_health_check" {
+  description = "Route53ヘルスチェックを有効にするかどうか"
+  type        = bool
+  default     = false
+}
+
+
 # RDS関連の変数
 variable "db_engine_version" {
   description = "RDSエンジンバージョン"

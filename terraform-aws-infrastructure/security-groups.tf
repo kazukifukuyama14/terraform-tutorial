@@ -219,3 +219,41 @@ resource "aws_security_group" "vpc_endpoint" {
     create_before_destroy = true
   }
 }
+
+# DNS Resolver用セキュリティグループ
+resource "aws_security_group" "dns_resolver" {
+  count       = var.enable_private_dns ? 1 : 0
+  name        = "${var.project_name}-${var.environment}-dns-resolver-sg"
+  description = "Security group for Route53 DNS Resolver"
+  vpc_id      = aws_vpc.main.id
+
+  # DNS通信を許可（UDP/TCP 53番ポート）
+  ingress {
+    description = "DNS UDP from VPC"
+    from_port   = 53
+    to_port     = 53
+    protocol    = "udp"
+    cidr_blocks = [aws_vpc.main.cidr_block]
+  }
+
+  ingress {
+    description = "DNS TCP from VPC"
+    from_port   = 53
+    to_port     = 53
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.main.cidr_block]
+  }
+
+  egress {
+    description = "All outbound traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name        = "${var.project_name}-${var.environment}-dns-resolver-sg"
+    Environment = var.environment
+  }
+}

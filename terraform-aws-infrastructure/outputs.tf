@@ -60,3 +60,28 @@ output "sns_topic_arn" {
   description = "SNSトピックのARN"
   value       = aws_sns_topic.alerts.arn
 }
+# Route53関連の出力
+output "hosted_zone_id" {
+  description = "Route53ホストゾーンID"
+  value       = aws_route53_zone.main.zone_id
+}
+
+output "hosted_zone_name_servers" {
+  description = "Route53ネームサーバー"
+  value       = aws_route53_zone.main.name_servers
+}
+
+output "domain_name" {
+  description = "設定されたドメイン名"
+  value       = var.environment == "prod" ? var.domain_name : "${var.environment}.${var.domain_name}"
+}
+
+output "website_url" {
+  description = "WebサイトのURL"
+  value       = "http://${var.environment == "prod" ? var.domain_name : "${var.environment}.${var.domain_name}"}"
+}
+
+output "private_hosted_zone_id" {
+  description = "プライベートホストゾーンID"
+  value       = var.enable_private_dns ? aws_route53_zone.private[0].zone_id : null
+}
