@@ -50,8 +50,13 @@ terraform.rc
 keys/
 .ssh/
 
+terraform.tfvars.backup
+*.tfvars
+.terraform/
+terraform.tfstate*
+
 # その他
 .DS_Store
 *.log
 
-# End of https://www.toptal.com/developers/gitignore/api/terraform
+# End of https://www.toptal.com/developers/gitignore/api/terraformterraform.tfvars
