@@ -85,3 +85,19 @@ output "private_hosted_zone_id" {
   description = "プライベートホストゾーンID"
   value       = var.enable_private_dns ? aws_route53_zone.private[0].zone_id : null
 }
+
+# WAF関連の出力
+output "waf_web_acl_id" {
+  description = "WAF Web ACL ID"
+  value       = aws_wafv2_web_acl.main.id
+}
+
+output "waf_web_acl_arn" {
+  description = "WAF Web ACL ARN"
+  value       = aws_wafv2_web_acl.main.arn
+}
+
+output "waf_web_acl_capacity" {
+  description = "WAF Web ACL Capacity"
+  value       = aws_wafv2_web_acl.main.capacity
+}

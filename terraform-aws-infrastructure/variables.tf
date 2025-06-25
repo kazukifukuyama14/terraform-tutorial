@@ -243,3 +243,46 @@ variable "aws_region" {
   type        = string
   default     = "ap-northeast-1"
 }
+
+# WAF関連の変数
+variable "waf_rate_limit" {
+  description = "WAFレート制限（5分間のリクエスト数）"
+  type        = number
+  default     = 2000
+}
+
+variable "enable_ip_whitelist" {
+  description = "IPホワイトリストを有効にするかどうか"
+  type        = bool
+  default     = false
+}
+
+variable "enable_ip_blacklist" {
+  description = "IPブラックリストを有効にするかどうか"
+  type        = bool
+  default     = false
+}
+
+variable "whitelist_ips" {
+  description = "ホワイトリストIP（CIDR形式）"
+  type        = list(string)
+  default     = []
+}
+
+variable "blacklist_ips" {
+  description = "ブラックリストIP（CIDR形式）"
+  type        = list(string)
+  default     = []
+}
+
+variable "blocked_countries" {
+  description = "ブロックする国コード（ISO 3166-1 alpha-2）"
+  type        = list(string)
+  default     = []
+}
+
+variable "enable_waf_logging" {
+  description = "WAFログを有効にするかどうか"
+  type        = bool
+  default     = false
+}
