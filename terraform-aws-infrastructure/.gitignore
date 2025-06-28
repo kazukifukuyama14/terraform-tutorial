@@ -58,5 +58,7 @@ terraform.tfvars
 # その他
 .DS_Store
 *.log
+alb-bucket-policy.json
+*.json.backup
 
-# End of https://www.toptal.com/developers/gitignore/api/terraformterraform.tfvars
+# End of https://www.toptal.com/developers/gitignore/api/terraformterraform.tfvars# Temporary policy files
