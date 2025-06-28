@@ -72,7 +72,7 @@ resource "aws_db_instance" "main" {
   # ストレージ設定
   allocated_storage     = var.db_allocated_storage
   max_allocated_storage = var.db_max_allocated_storage
-  storage_type          = "gp3"
+  storage_type = "gp2"
   storage_encrypted     = true
 
   # データベース設定
