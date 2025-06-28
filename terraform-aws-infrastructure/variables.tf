@@ -108,7 +108,7 @@ variable "db_username" {
 variable "allowed_ssh_cidr" {
   description = "CIDR blocks allowed to SSH to bastion"
   type        = list(string)
-  default     = ["0.0.0.0/0"]
+  default     = []
 }
 
 variable "app_port" {
