@@ -50,7 +50,7 @@ resource "aws_internet_gateway" "main" {
 
 # Public Subnets
 resource "aws_subnet" "public" {
-  count = length(var.public_subnet_cidrs)
+  count = 1
 
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnet_cidrs[count.index]
@@ -93,7 +93,7 @@ resource "aws_subnet" "database" {
 
 # NAT Gateway
 resource "aws_eip" "nat" {
-  count = length(var.public_subnet_cidrs)
+  count = 1
 
   domain     = "vpc"
   depends_on = [aws_internet_gateway.main]
@@ -105,7 +105,7 @@ resource "aws_eip" "nat" {
 
 # NAT Gateway
 resource "aws_nat_gateway" "main" {
-  count = length(var.public_subnet_cidrs)
+  count = 1
 
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
@@ -139,7 +139,7 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.main[count.index].id
+    nat_gateway_id = aws_nat_gateway.main[0].id
   }
 
   tags = {
