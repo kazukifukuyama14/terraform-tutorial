@@ -50,7 +50,7 @@ resource "aws_internet_gateway" "main" {
 
 # Public Subnets
 resource "aws_subnet" "public" {
-  count = 1
+  count = length(var.public_subnet_cidrs)
 
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnet_cidrs[count.index]
@@ -93,7 +93,7 @@ resource "aws_subnet" "database" {
 
 # NAT Gateway
 resource "aws_eip" "nat" {
-  count = 1
+  count = length(var.public_subnet_cidrs)
 
   domain     = "vpc"
   depends_on = [aws_internet_gateway.main]
@@ -105,7 +105,7 @@ resource "aws_eip" "nat" {
 
 # NAT Gateway
 resource "aws_nat_gateway" "main" {
-  count = 1
+  count = length(var.public_subnet_cidrs)
 
   allocation_id = aws_eip.nat[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
