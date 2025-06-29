@@ -126,7 +126,7 @@ output "ssh_access_info" {
   value = {
     enabled       = var.enable_ssh_access
     allowed_cidrs = var.allowed_ssh_cidr
-    key_name      = var.key_name
+    key_name = aws_key_pair.new_main.key_name
   }
 }
 

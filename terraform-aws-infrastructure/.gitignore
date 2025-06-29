@@ -50,6 +50,19 @@ terraform.rc
 keys/
 .ssh/
 
+# SSH秘密鍵（セキュリティ上重要）
+terraform-tutorial-key-new
+*.pem
+
+# Session Manager Bundle
+sessionmanager-bundle/
+
+# バックアップファイル
+*.backup
+*_backup
+*.bak
+*.old
+
 terraform.tfvars.backup
 *.tfvars
 .terraform/
