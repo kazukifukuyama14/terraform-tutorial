@@ -6,7 +6,7 @@
 
 Internet Gateway | Public Subnet (10.0.1.0/24) | Bastion Server | Private Subnet (10.0.10.0/24) | App Server
 
-[diagram](/img/diagram.png)
+![diagram](/img/diagram.png)
 
 ## 📋 構築されるリソース
 
